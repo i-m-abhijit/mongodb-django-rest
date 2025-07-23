@@ -2,8 +2,8 @@
 
 A comprehensive MongoDB integration library for Django applications with full Django REST framework support. Provides an ORM-like interface similar to Django's built-in ORM but designed specifically for MongoDB.
 
-[![PyPI version](https://badge.fury.io/py/mongodb-rest.svg)](https://badge.fury.io/py/mongodb-rest)
-[![Python versions](https://img.shields.io/pypi/pyversions/mongodb-rest.svg)](https://pypi.org/project/mongodb-rest/)
+[![Test PyPI version](https://img.shields.io/badge/Test%20PyPI-v0.1.1-blue)](https://test.pypi.org/project/mongodb-rest/)
+[![Python versions](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚀 Key Features
@@ -86,7 +86,7 @@ class User(Document):
     age = IntField(min_value=0, max_value=150)
     tags = ListField(StringField(max_length=50))
     created_at = DateTimeField(auto_now_add=True)
-    
+
     meta = {
         'collection': 'users',
         'indexes': ['email', '-created_at']
@@ -97,7 +97,7 @@ class BlogPost(Document):
     content = StringField()
     author = ReferenceField(User)
     published_at = DateTimeField()
-    
+
     meta = {
         'collection': 'blog_posts',
         'ordering': ['-published_at']
@@ -159,30 +159,30 @@ class Product(Document):
     name = StringField(required=True, max_length=100)
     email = EmailField()
     website = URLField()
-    
+
     # Numeric fields
     price = DecimalField(min_value=0, max_digits=10, decimal_places=2)
     quantity = IntField(min_value=0)
     rating = FloatField(min_value=0.0, max_value=5.0)
-    
+
     # Date/time fields
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
     launch_date = DateField()
-    
+
     # Complex fields
     tags = ListField(StringField(max_length=50))
     metadata = DictField()
     specifications = EmbeddedDocumentField('ProductSpecs')
     category = ReferenceField('Category')
-    
+
     # File fields
     image = ImageField()
     manual = FileField()
-    
+
     # Geospatial
     location = PointField()  # [longitude, latitude]
-    
+
     # Other
     is_active = BooleanField(default=True)
     binary_data = BinaryField()
@@ -201,10 +201,10 @@ class UserSerializer(DocumentSerializer):
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    
+
     def get_queryset(self):
         return User.objects.filter(is_active=True)
-    
+
     @action(detail=False)
     def recent_users(self, request):
         recent = User.objects.filter(
@@ -253,7 +253,7 @@ connect('cache_db', alias='cache')
 class AnalyticsData(Document):
     event_name = StringField()
     timestamp = DateTimeField()
-    
+
     meta = {
         'db_alias': 'analytics'
     }
@@ -286,7 +286,7 @@ def validate_phone(value):
 
 class User(Document):
     phone = StringField(validation=validate_phone)
-    
+
     def clean(self):
         if self.age < 13 and not self.parent_email:
             raise ValidationError('Users under 13 need parent email')
@@ -316,7 +316,7 @@ class User(Document):
     email = EmailField()
     name = StringField()
     location = PointField()
-    
+
     meta = {
         'indexes': [
             'email',                           # Simple index
@@ -376,6 +376,7 @@ class User(Document):
 ## 📚 Documentation
 
 For complete documentation with all features, examples, and API reference, visit:
+
 - **GitHub Repository**: [https://github.com/i-m-abhijit/mongodb-django-rest](https://github.com/i-m-abhijit/mongodb-django-rest)
 - **Full Documentation**: See `DOCUMENTATION.md` in the repository
 
