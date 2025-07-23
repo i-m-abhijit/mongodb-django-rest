@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mongodb-rest"
+version = "0.1.0"
+description = "A MongoDB library with Django REST framework integration"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    {name = "Abhijit Dey", email = "abhideybnk@gmail.com"}
+]
+keywords = ["mongodb", "django", "rest-framework", "database"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Django",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "pymongo>=4.0.0",
+    "djangorestframework>=3.12.0",
+    "django>=3.2.0",
+    "python-dateutil>=2.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-django",
+    "black",
+    "flake8",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/i-m-abhijit/mongodb-django-rest"
+Repository = "https://github.com/i-m-abhijit/mongodb-django-rest"
+Documentation = "https://github.com/i-m-abhijit/mongodb-django-rest#readme"
+"Bug Tracker" = "https://github.com/i-m-abhijit/mongodb-django-rest/issues"
+
+[tool.setuptools.packages.find]
+include = ["mongodb*", "base*", "queryset*", "rest_framework*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
